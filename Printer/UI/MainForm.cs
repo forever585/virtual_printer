@@ -51,7 +51,9 @@ namespace Printer
             {
                 PanelControl printerItem = new PrinterItem(i, printer).getPrinterItem();
                 SimpleButton btnDelete = (SimpleButton) printerItem.Controls.Find("btnDelPrinter" + i, true)[0];
+                SimpleButton btnSettingPrinter = (SimpleButton)printerItem.Controls.Find("btnSettingPrinter" + i, true)[0];
                 btnDelete.Click += new System.EventHandler(this.btnDeleteClicked);
+                btnSettingPrinter.Click += new System.EventHandler(this.btnSettingPrinterClicked);
                 panelPrinters.Controls.Add(printerItem);
                 i++;
             }
@@ -154,13 +156,13 @@ namespace Printer
         private void BtnAddPrinter_Click(object sender, EventArgs e)
         {
             DialogResult result = XtraMessageBox.Show(this, "Do you want add priter?",
-                        "Printer Deleted", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        "Printer Add", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.No) return;
             try
             {
                 if (Environment.Is64BitOperatingSystem)
                 {
-                    PrinterHelper.installPrinter("dokimastikos64aris");
+                    PrinterHelper.installPrinter("dokimastikos32aris");
                 }
                 else
                 {
@@ -173,6 +175,22 @@ namespace Printer
 
             }
             
+        }
+
+        private void btnSettingPrinterClicked(object sender, EventArgs e)
+        {
+
+            try
+            {
+                SimpleButton button = (SimpleButton)sender;
+                string printerName = button.Tag.ToString();
+                PrinterHelper.setPrinterSetting(printerName);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
         }
 
         private void btnDeleteClicked(object sender, EventArgs e)

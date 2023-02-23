@@ -36,6 +36,16 @@ namespace Printer
             labelPrinter.TabIndex = 1;
             labelPrinter.Text = printerName;
             // 
+            // btnSettingPrinter
+            // 
+            SimpleButton btnSettingPrinter = new SimpleButton();
+            btnSettingPrinter.ImageOptions.Image = global::ExamApp.Properties.Resources.technology_32x32;
+            btnSettingPrinter.Location = new System.Drawing.Point(370, 8);
+            btnSettingPrinter.Name = "btnSettingPrinter" + i;
+            btnSettingPrinter.Size = new System.Drawing.Size(38, 38);
+            btnSettingPrinter.TabIndex = 2;
+            btnSettingPrinter.Tag = printerName;
+            // 
             // btnDelPrinter
             // 
             SimpleButton btnDelPrinter = new SimpleButton();
@@ -43,9 +53,10 @@ namespace Printer
             btnDelPrinter.Location = new System.Drawing.Point(417, 8);
             btnDelPrinter.Name = "btnDelPrinter" + i;
             btnDelPrinter.Size = new System.Drawing.Size(38, 38);
-            btnDelPrinter.TabIndex = 2;
+            btnDelPrinter.TabIndex = 3;
             btnDelPrinter.Tag = printerName;
 
+            panelControl.Controls.Add(btnSettingPrinter);
             panelControl.Controls.Add(btnDelPrinter);
             panelControl.Controls.Add(labelPrinter);
             panelControl.Controls.Add(picPrinter);

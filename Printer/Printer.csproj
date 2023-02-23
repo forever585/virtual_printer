@@ -4,7 +4,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{282F8800-83B6-42C4-909C-81FA3CF88276}</ProjectGuid>
+    <ProjectGuid>{78D0DEEB-422C-4EFD-9B11-DC4AE05A2263}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ExamApp</RootNamespace>
@@ -109,6 +109,7 @@
   <ItemGroup>
     <Content Include="Misc\config.xml" />
     <Content Include="Misc\Translations.xml" />
+    <None Include="Resources\technology_32x32.png" />
     <None Include="Resources\save_32x32.png" />
     <None Include="Resources\open2_32x32.png" />
     <None Include="Resources\add_32x321.png" />
@@ -119,6 +120,7 @@
     <None Include="Resources\cmp_green.ico" />
     <None Include="Resources\icon_printer.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

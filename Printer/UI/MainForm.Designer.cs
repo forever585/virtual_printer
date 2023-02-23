@@ -60,11 +60,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Stencil Std", 12F);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.label1.Location = new System.Drawing.Point(13, 34);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 21);
+            this.label1.Size = new System.Drawing.Size(63, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Printers";
             // 
@@ -118,7 +118,7 @@
             // 
             this.btnAddPrinter.Appearance.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnAddPrinter.Appearance.Options.UseFont = true;
-            this.btnAddPrinter.ImageOptions.Image = global::ExamApp.Properties.Resources.add_32x321;
+            this.btnAddPrinter.ImageOptions.Image = global::ExamApp.Properties.Resources.add_32x32;
             this.btnAddPrinter.Location = new System.Drawing.Point(3, 3);
             this.btnAddPrinter.Name = "btnAddPrinter";
             this.btnAddPrinter.Size = new System.Drawing.Size(85, 40);
@@ -138,9 +138,8 @@
             ((DevExpress.Utils.Behaviors.Behavior)(DevExpress.Utils.Behaviors.Common.FileIconBehavior.Create(typeof(DevExpress.XtraEditors.Behaviors.FileIconBehaviorSourceForLabelControl), DevExpress.Utils.Behaviors.Common.FileIconSize.Small, null, null)))});
             this.labelFolerPath.Location = new System.Drawing.Point(5, 0);
             this.labelFolerPath.Name = "labelFolerPath";
-            this.labelFolerPath.Size = new System.Drawing.Size(21, 20);
+            this.labelFolerPath.Size = new System.Drawing.Size(0, 0);
             this.labelFolerPath.TabIndex = 3;
-            this.labelFolerPath.Text = "sss";
             // 
             // panelControl2
             // 

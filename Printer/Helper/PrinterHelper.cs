@@ -24,8 +24,10 @@ namespace Printer
     {
        public static StringCollection getPrinterNames()
         {
-            return System.Drawing.Printing.PrinterSettings.InstalledPrinters;
+            return InstalledPrinters;
         }
+
+        private static string comName = "";
         public static void installPrinter(string printerName) //works on win 7,8,8.1,10 on both x84 and x64
         {
             //https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/rundll32-printui
@@ -35,9 +37,10 @@ namespace Printer
             //  /f[file]	Species the Universal Naming Convention (UNC) path and name of the .inf file name or the output file name, depending on the task that you are performing. Use /F[file] to specify a dependent .inf file.
             //  /r[port]	Specifies the port name.
             //  /m[model]	Specifies the driver model name. (This value can be specified in the .inf file.)
-			Winspool.AddLocalPort(@"C:\MyLocalPort.txt");
+			Winspool.AddLocalPort(comName);
+            
             string arg;
-            arg = "printui.dll , PrintUIEntry /if /b " + "\"" + printerName + "\"" + @" /f C:\Windows\inf\ntprint.inf /r " + "\"" + @"C:\MyLocalPort.txt" + "\"" + " /m " + "\"" + "Generic / Text Only" + "\""; //initial arg
+            arg = "printui.dll , PrintUIEntry /if /b " + "\"" + printerName + "\"" + @" /f C:\Windows\inf\ntprint.inf /r " + comName + " /m " + "\"" + "Generic / Text Only" + "\""; //initial arg
             ProcessStartInfo p = new ProcessStartInfo();
             p.FileName = "rundll32.exe";
             p.Arguments = arg;
@@ -50,8 +53,36 @@ namespace Printer
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.ToString());
             }
         }
+
+        public static void setPrinterSetting(string printerName) //works on win 7,8,8.1,10 on both x84 and x64
+        {
+            //https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/rundll32-printui
+            //  /if	        Installs a printer by using an .inf file.
+            //  /b[name]	Specifies the base printer name.
+            //  /@[file]	Specifies a command-line argument file and directly inserts the text in that file into the command line.
+            //  /f[file]	Species the Universal Naming Convention (UNC) path and name of the .inf file name or the output file name, depending on the task that you are performing. Use /F[file] to specify a dependent .inf file.
+            //  /r[port]	Specifies the port name.
+            //  /m[model]	Specifies the driver model name. (This value can be specified in the .inf file.)
+
+            string arg;
+            arg = string.Format("printui.dll , PrintUIEntry /p /n \"{0}\" /r \"{1}\"", printerName, " COM32"); //set port
+            ProcessStartInfo p = new ProcessStartInfo();
+            p.FileName = "rundll32.exe";
+            p.Arguments = arg;
+            p.WindowStyle = ProcessWindowStyle.Hidden;
+            try
+            {
+                Process.Start(p);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
         public static bool printerExists(string printerName)
         {
             bool res = false;
@@ -141,8 +172,8 @@ namespace Printer
                 def.DesiredAccess = 1; //Server Access Administer
 
                 IntPtr hPrinter = IntPtr.Zero;
-
-                int n = OpenPrinter(",XcvMonitor Local Port", ref hPrinter, def);
+                comName = "COM33";
+                int n = OpenPrinter(",XcvPort COM3", ref hPrinter, def);
                 if (n == 0)
                     return Marshal.GetLastWin32Error();
 
