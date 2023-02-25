@@ -17,8 +17,7 @@ namespace Printer
     {
         private static configuration _conf;
 
-        public string path;
-        public string installPath;
+        public string testFilePath = "";
 
         public MainForm()
         {
@@ -52,8 +51,10 @@ namespace Printer
                 PanelControl printerItem = new PrinterItem(i, printer).getPrinterItem();
                 SimpleButton btnDelete = (SimpleButton) printerItem.Controls.Find("btnDelPrinter" + i, true)[0];
                 SimpleButton btnSettingPrinter = (SimpleButton)printerItem.Controls.Find("btnSettingPrinter" + i, true)[0];
-                btnDelete.Click += new System.EventHandler(this.btnDeleteClicked);
-                btnSettingPrinter.Click += new System.EventHandler(this.btnSettingPrinterClicked);
+                SimpleButton btnPrintTestPage = (SimpleButton)printerItem.Controls.Find("btnPrintTestPage" + i, true)[0];
+                btnDelete.Click += new EventHandler(this.btnDeleteClicked);
+                btnSettingPrinter.Click += new EventHandler(this.btnSettingPrinterClicked);
+                btnPrintTestPage.Click += new EventHandler(this.btnPrintTestPageClick);
                 panelPrinters.Controls.Add(printerItem);
                 i++;
             }
@@ -193,6 +194,27 @@ namespace Printer
 
         }
 
+        private void btnPrintTestPageClick(object sender, EventArgs e)
+        {
+            try
+            {
+                SimpleButton button = (SimpleButton)sender;
+                string printerName = button.Tag.ToString();
+                if(testFilePath == "")
+                {
+                    DialogResult result = XtraMessageBox.Show(this, "Please select path first!",
+                        "Select Path", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                PrinterHelper.printTestPage(printerName, testFilePath + "\\test.txt");
+            }
+            catch (Exception ex)
+            {
+
+            }
+            
+        }
+
         private void btnDeleteClicked(object sender, EventArgs e)
         {
             
@@ -222,9 +244,10 @@ namespace Printer
             {
                 labelFolerPath.Text = dialog.SelectedPath;
                 Environment.SpecialFolder root = dialog.RootFolder;
-                path = labelFolerPath.Text.Replace(@"\", @"\\");
-                installPath = "\"" + path + "\"";
+                testFilePath = dialog.SelectedPath;
+                //testFilePath = labelFolerPath.Text.Replace(@"\", @"\\");
             }
         }
+
     }
 }
